@@ -1,10 +1,19 @@
 package com.flipkart.bean;
 
+import java.util.ArrayList;
+
 public class GymOwner extends User{
 	private String gstNo;
 	private Boolean isApproved;
 	private String address;
+	private ArrayList<Integer> centreList;
 	
+	public ArrayList<Integer> getCentreList() {
+		return centreList;
+	}
+	public void setCentreList(ArrayList<Integer> centreList) {
+		this.centreList = centreList;
+	}
 	public String getGstNo() {
 		return gstNo;
 	}
