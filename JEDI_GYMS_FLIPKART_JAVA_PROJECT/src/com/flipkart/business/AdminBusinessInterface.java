@@ -1,6 +1,8 @@
 package com.flipkart.business;
 
 import com.flipkart.bean.*;
+import com.flipkart.exception.GymNotFoundException;
+import com.flipkart.exception.GymOwnerNotFoundException;
 
 import java.util.*;
 
@@ -23,7 +25,7 @@ public interface AdminBusinessInterface{
     /*
     approves the gym owner request whose email is passed
     */
-    public void approveSingleGymOwnerRequest(String gymOwnerEmail);
+    public void approveSingleGymOwnerRequest(String gymOwnerEmail) throws GymOwnerNotFoundException;
    
     /*
     approves all the pending gym owner requests

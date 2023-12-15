@@ -6,6 +6,8 @@ import java.util.Scanner;
 import com.flipkart.bean.GymCentre;
 import com.flipkart.bean.GymOwner;
 import com.flipkart.business.*;
+import com.flipkart.exception.GymNotFoundException;
+import com.flipkart.exception.GymOwnerNotFoundException;
 
 public class GMSAdminClient {
 	AdminBusiness adminBusiness = new AdminBusiness();
@@ -36,7 +38,7 @@ public class GMSAdminClient {
 				approveGymOwnerRequest();
 				break;
 			case 7:
-//				GMSApplicationClient.menu();
+				GMSApplicationClient.menu();
 				break;
 
 			default:
@@ -49,13 +51,12 @@ public class GMSAdminClient {
 
 		List<GymOwner> gymOwners = adminBusiness.getGymOwners();
 
-		System.out.printf("GymOwner Email", "GymOwner Name", "Phone Number", "Aadhaar",
-				"PAN number", "Verification");
+		System.out.printf("GymOwner Email", "GymOwner Name", "Phone Number", "Verification");
 		gymOwners.forEach(gymOwner -> {
 		    System.out.println();
-//		    System.out.printf(gymOwner.getEmail(), gymOwner.getName(),
-//		            gymOwner.getPhoneNumber(), gymOwner.getAadharNumber(), gymOwner.getPanNumber(),
-//		            gymOwner.isVerified() ? "Verified" : "Not Verified");
+		    System.out.printf(gymOwner.getEmailId(), gymOwner.getName(),
+		            gymOwner.getPhoneNo(),
+		            gymOwner.getIsApproved() ? "Verified" : "Not Verified");
 		});
 
 	}
@@ -63,13 +64,13 @@ public class GMSAdminClient {
 		List<GymCentre> gyms = adminBusiness.getGym();
 		
 		System.out.println();
-		System.out.printf("Gym Id", "Gym Name", "Gym Owner", "Address", "SlotCount",
+		System.out.printf("Gym Id", "Gym Name", "Gym Owner", "Address",
 				"SeatsPerSlot", "Verification");
 		gyms.forEach(gym -> {
 		    System.out.println();
-//		    System.out.printf(gym.getGymId(), gym.getGymName(), gym.getOwnerEmail(),
-//		            gym.getAddress(), gym.getSlotCount(), gym.getSeatsPerSlotCount(),
-//		            gym.isVerified() ? "Verified" : "Not Verified");
+		    System.out.printf(gym.getId(), gym.getName(), gym.getGymOwnerEmail(),
+		            gym.getLocation(), gym.getNoOfSeats(),
+		            gym.isApproved() ? "Verified" : "Not Verified");
 		});
 		System.out.println();
 
@@ -82,13 +83,12 @@ public class GMSAdminClient {
 			return;
 		}
 
-		System.out.printf("GymOwner Email", "GymOwner Name", "Phone Number", "Aadhaar",
-				"PAN number", "Verification");
+		System.out.printf("GymOwner Email", "GymOwner Name", "Phone Number", "Verification");
 		gymOwners.forEach(gymOwner -> {
 		    System.out.println();
-//		    System.out.printf(gymOwner.getEmail(), gymOwner.getName(),
-//		            gymOwner.getPhoneNumber(), gymOwner.getAadharNumber(), gymOwner.getPanNumber(),
-//		            gymOwner.isVerified() ? "Verified" : "Not Verified");
+		    System.out.printf(gymOwner.getEmailId(), gymOwner.getName(),
+		            gymOwner.getPhoneNo(),
+		            gymOwner.getIsApproved() ? "Verified" : "Not Verified");
 		});
 	}
 	
@@ -100,26 +100,32 @@ public class GMSAdminClient {
 			return;
 		}
 
-		System.out.printf("Gym Id", "Gym Name", "Gym Owner", "Address", "SlotCount",
+		System.out.printf("Gym Id", "Gym Name", "Gym Owner", "Address",
 				"SeatsPerSlot", "Verification");
 		gyms.forEach(gym -> {
 		    System.out.println();
-//		    System.out.printf(gym.getGymId(), gym.getGymName(), gym.getOwnerEmail(),
-//		            gym.getAddress(), gym.getSlotCount(), gym.getSeatsPerSlotCount(),
-//		            gym.isVerified() ? "Verified" : "Not Verified");
+		    System.out.printf(gym.getId(), gym.getName(), gym.getGymOwnerEmail(),
+		            gym.getLocation(), gym.getNoOfSeats(),
+		            gym.isApproved() ? "Verified" : "Not Verified");
 		});
 		System.out.println();
 	}
 	
 
 	public void approveGymRequest() {
-		System.out.print("Enter gym Id: ");
-	    adminBusiness.approveSingleGymRequest(sc.next()); 
+		
+		adminBusiness.approveSingleGymRequest(sc.next());
+		
 	}
 	
 	public void approveGymOwnerRequest() {
 		System.out.print("Enter gym owner email: ");
-		adminBusiness.approveSingleGymOwnerRequest(sc.next());
+		try {
+			adminBusiness.approveSingleGymOwnerRequest(sc.next());
+		} catch (GymOwnerNotFoundException e) {
+			// TODO Auto-generated catch block
+			System.out.println(e.getMessage());
+		}
 		
 	}
 

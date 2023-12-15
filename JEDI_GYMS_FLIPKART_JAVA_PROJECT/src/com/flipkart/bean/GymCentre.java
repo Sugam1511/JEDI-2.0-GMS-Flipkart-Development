@@ -8,18 +8,18 @@ package com.flipkart.bean;
  */
 public class GymCentre {
 	
-	private int id;
+	private String id;
 	private String gymOwnerEmail;
 	private String name;
 	private String location;
 	private int noOfSeats;
 	private boolean isApproved;
 	
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 	
