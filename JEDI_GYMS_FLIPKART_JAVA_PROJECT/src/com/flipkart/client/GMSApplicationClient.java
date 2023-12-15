@@ -1,7 +1,7 @@
 package com.flipkart.client;
-
+import com.flipkart.bean.*;
 import java.util.Scanner;
-
+import com.flipkart.client.*;
 public class GMSApplicationClient {
 
 	public static void main(String[] args) {
@@ -38,6 +38,8 @@ public class GMSApplicationClient {
 					
 					break;
 				case 3:
+					GMSGymOwnerClient Owner = new GMSGymOwnerClient();
+					Owner.registerGymOwner(sc);
 					
 					break;
 				case 4:
