@@ -11,19 +11,38 @@ import java.util.LinkedList;
  */
 public class Slot {
 	
-	private int id;
+	private String id;
+	private int gymId;
 	private String time;
+	private String date;
 	private Queue<Integer> waitingList;
+	
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
+	
+	public int getGymId() {
+		return gymId;
+	}
+
+	public void setGymId(int gymId) {
+		this.gymId = gymId;
+	}
 
 	public Slot() {
 		waitingList = new LinkedList<>();
 	}
 
-	public int getId() {
+	public String getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

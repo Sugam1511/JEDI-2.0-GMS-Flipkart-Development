@@ -2,10 +2,11 @@ package com.flipkart.client;
 import com.flipkart.bean.*;
 import java.util.Scanner;
 import com.flipkart.business.*;
+import com.flipkart.exception.UserAlreadyExistsException;
 
 public class GMSGymOwnerClient {
 	User user = new User();
-	public void registerGymOwner(Scanner sc){
+	public void registerGymOwner(Scanner sc) throws UserAlreadyExistsException{
 		UserBusiness userBusiness = new UserBusiness();
 		
 		GymOwner gymOwner = new GymOwner();

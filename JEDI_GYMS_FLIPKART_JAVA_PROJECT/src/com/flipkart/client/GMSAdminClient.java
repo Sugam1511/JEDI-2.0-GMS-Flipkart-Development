@@ -1,9 +1,20 @@
 package com.flipkart.client;
 
+import java.text.ParseException;
+import java.util.List;
 import java.util.Scanner;
 
+import com.flipkart.bean.GymCentre;
+import com.flipkart.bean.GymOwner;
+import com.flipkart.business.*;
+import com.flipkart.exception.UserAlreadyExistsException;
+
 public class GMSAdminClient {
-	public static void menu() {
+	AdminBusiness adminBusiness = new AdminBusiness();
+//	GMSApplicationClient gac = new  GMSApplicationClient();
+//	GMSAdminClient admc = new GMSAdminClient();
+	Scanner sc=new Scanner(System.in);
+	public void menu() throws UserAlreadyExistsException, ParseException {
 		Scanner sc=new Scanner(System.in);
 		while(true) {
 			System.out.println("Admin Menu");
@@ -11,25 +22,25 @@ public class GMSAdminClient {
 			int choice = sc.nextInt();
 			switch (choice) {
 			case 1:
-//				viewAllGymOwners();
+				viewAllGymOwners();
 				break;
 			case 2:
-//				viewAllGymCenters();
+				viewAllGymCenters();
 				break;
 			case 3:
-//				viewPendingGymOwnerRequests();
+				viewAllPendingGymOwnerRequests();
 				break;
 			case 4:
-//				viewPendingGymRequests();
+				viewAllPendingGymRequests();
 				break;
 			case 5:
-//				approveGymRequest();
+				approveGymRequest();
 				break;
 			case 6:
-//				approveGymOwnerRequest();
+				approveGymOwnerRequest();
 				break;
 			case 7:
-//				GMSApplicationClient.menu();
+				GMSApplicationClient.menu();
 				break;
 
 			default:
@@ -37,6 +48,88 @@ public class GMSAdminClient {
 			}
 			break;
 		}
+	}
+	public void viewAllGymOwners() {
+
+		List<GymOwner> gymOwners = adminBusiness.getGymOwners();
+
+		System.out.printf("GymOwner Email", "GymOwner Name", "Phone Number", "Aadhaar",
+				"PAN number", "Verification");
+		gymOwners.forEach(gymOwner -> {
+		    System.out.println();
+		    System.out.printf(gymOwner.getEmailId(), gymOwner.getName(),
+		            gymOwner.getPhoneNo(),
+		            gymOwner.getIsApproved() ? "Verified" : "Not Verified");
+		    //, gymOwner.getAadharNumber(), gymOwner.getPanNumber()
+		});
+
+	}
+	public void viewAllGymCenters() {
+		List<GymCentre> gyms = adminBusiness.getGym();
+		
+		System.out.println();
+		System.out.printf("Gym Id", "Gym Name", "Gym Owner", "Address", "SlotCount",
+				"SeatsPerSlot", "Verification");
+		gyms.forEach(gym -> {
+		    System.out.println();
+		    String approv = gym.isApproved() ? "Verified" : "Not Verified";
+		    System.out.printf(gym.getId()+" " + gym.getName() + " " + gym.getGymOwnerEmail() + " " + 
+		            gym.getLocation()+ " " + gym.getNoOfSeats() + " " + 
+		            approv);
+		    // gym.get=SlotCount(),
+		});
+		System.out.println();
+
+	}
+	
+	public void viewAllPendingGymOwnerRequests() {
+		List<GymOwner> gymOwners = adminBusiness.viewAllPendingGymOwnerRequests();
+		if (gymOwners.size() == 0) {
+			System.out.println("No pending Gym Owner requests!");
+			return;
+		}
+
+		System.out.printf("GymOwner Email", "GymOwner Name", "Phone Number", "Aadhaar",
+				"PAN number", "Verification");
+		gymOwners.forEach(gymOwner -> {
+		    System.out.println();
+		    System.out.printf(gymOwner.getEmailId(), gymOwner.getName(),
+		            gymOwner.getPhoneNo(), 
+		            gymOwner.getIsApproved() ? "Verified" : "Not Verified");
+		    //gymOwner.getAadharNumber(), gymOwner.getPanNumber(),
+		});
+	}
+	
+	public void viewAllPendingGymRequests() {
+
+		List<GymCentre> gyms = adminBusiness.viewAllPendingGymRequests();
+		if (gyms.size() == 0) {
+			System.out.println("No pending Gym requests!");
+			return;
+		}
+
+		System.out.printf("Gym Id", "Gym Name", "Gym Owner", "Address",
+				"SeatsPerSlot", "Verification");
+		gyms.forEach(gym -> {
+		    System.out.println();
+		    String approv = gym.isApproved() ? "Verified" : "Not Verified";
+		    System.out.printf(gym.getId()+ " " + gym.getName() + " " + gym.getGymOwnerEmail()+ " " + 
+		            gym.getLocation()+ " " + gym.getNoOfSeats() + " " + approv);
+		    //, gym.getSlotCount(), 
+		});
+		System.out.println();
+	}
+	
+
+	public void approveGymRequest() {
+		System.out.print("Enter gym Id: ");
+	    adminBusiness.approveSingleGymRequest(sc.next()); 
+	}
+	
+	public void approveGymOwnerRequest() {
+		System.out.print("Enter gym owner email: ");
+		adminBusiness.approveSingleGymOwnerRequest(sc.next());
+		
 	}
 
 }
