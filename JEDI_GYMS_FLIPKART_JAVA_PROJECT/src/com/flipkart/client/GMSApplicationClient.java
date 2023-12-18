@@ -16,6 +16,8 @@ public class GMSApplicationClient {
 
 			switch (choice) {
 				case 1:
+					System.out.print("Enter Email: ");
+					String userEmail = sc.next();
 					System.out.println("Enter username");
 					String username = sc.next();
 					System.out.println("Enter password");
@@ -28,7 +30,7 @@ public class GMSApplicationClient {
 						gmsAdminClient.menu();
 						break;
 					} else if (role.equalsIgnoreCase("GymOwner")) {
-						GMSGymOwnerClient.menu();
+						GMSGymOwnerClient.menu(sc, userEmail);
 						break;
 					} else if (role.equalsIgnoreCase("Customer")){
 						GMSCustomerClient.menu();

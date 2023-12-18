@@ -12,9 +12,12 @@ import java.util.LinkedList;
 public class Slot {
 	
 	private String id;
-	private int gymId;
+	private String gymId;
 	private String time;
 	private String date;
+	private int numOfSeats;
+	private String trainer;
+	private int numOfSeatsBooked;
 	private Queue<Integer> waitingList;
 	
 	public String getDate() {
@@ -26,11 +29,11 @@ public class Slot {
 	}
 
 	
-	public int getGymId() {
+	public String getGymId() {
 		return gymId;
 	}
 
-	public void setGymId(int gymId) {
+	public void setGymId(String gymId) {
 		this.gymId = gymId;
 	}
 
@@ -40,6 +43,14 @@ public class Slot {
 
 	public String getId() {
 		return id;
+	}
+	
+	public int getNumOfSeats() {
+		return numOfSeats;
+	}
+
+	public void setNumOfSeats(int numOfSeats) {
+		this.numOfSeats = numOfSeats;
 	}
 
 	public void setId(String id) {
@@ -53,6 +64,24 @@ public class Slot {
 	public void setTime(String time) {
 		this.time = time;
 	}	
+	
+	public void setNumOfSeatsBooked(int numOfSeatsBooked)
+	{
+		this.numOfSeatsBooked=numOfSeatsBooked;
+	}
+	
+	public int getNumOfSeatsBooked()
+	{
+		return numOfSeatsBooked;
+	}
+	
+	public String getTrainer() {
+		return trainer;
+	}
+
+	public void setTrainer(String trainer) {
+		this.trainer = trainer;
+	}
 	
 	
 }

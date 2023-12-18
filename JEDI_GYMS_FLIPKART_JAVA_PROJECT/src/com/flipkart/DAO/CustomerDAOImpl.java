@@ -42,7 +42,7 @@ public class CustomerDAOImpl implements CustomerDAO {
     	   // slot 1
 	         Slot s=new Slot();
 	         s.setId("1012");
-	         s.setGymId(101);
+	         s.setGymId("101");
 	         s.setTime("12:00");
 	         s.setDate("2023-12-17");
 	         slots.add(s);
