@@ -33,38 +33,6 @@ public class GymOwnerBusiness implements GymOwnerBusinessInterface {
 		return gymOwner;
 	}
 	/**
-	 * Gives functionality of updating gym onwer's personal data. 
-	 * @param gymOwnerNew the gymOwner object in which the profile data needs to be updated
-	 * @param email the gymOwner email for which the profile data needs to be update
-	 * @throws GymOwnerNotFoundException 
-	 */
-	public void editProfile(GymOwner gymOwnerNew) throws GymOwnerNotFoundException {
-		int updatedCount = gymOwnerDAO.editGymOwnerDetails(gymOwnerNew);
-		if (updatedCount == 0)
-			throw new GymOwnerNotFoundException();
-		System.out.println("\nEdited your profile Successfully!");
-	}
-	/**
-	 * This method allows a gym owner to add details of a particular gym.
-	 * @param gym the gym object representing the gym details
-	 */
-	public boolean addGym(GymCentre gym) {
-		gymOwnerDAO.addGym(gym);
-		System.out.println("\nAdded Gym Successfully! " + gym.getId());
-		return true;
-	}
-	/**
-	 * This method allows a gym owner to edit details of a particular gym.
-	 * @param gym the gym object representing the gym details
-	 * @throws GymNotFoundException 
-	 */
-//	public void editGym(GymCentre gym) throws GymNotFoundException {
-//		int updatedCount = gymOwnerDAO.editGym(gym);
-//		if (updatedCount == 0)
-//			throw new GymNotFoundException();
-//		System.out.println("\nEdited Gym Details Successfully! " + gym.getGymId());
-//	}
-	/**
 	 * Obtains all the gyms that owned by the given gym owner.
 	 * @param gymOwnerEmail the gym owner's email for which the list of gyms is requested
 	 * @return list of gyms owned by the given gym owner

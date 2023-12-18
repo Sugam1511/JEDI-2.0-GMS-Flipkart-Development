@@ -15,20 +15,6 @@ public interface GymOwnerBusinessInterface {
 	 * @throws GymOwnerNotFoundException 
 	 */
     public GymOwner getProfile(String email) throws GymOwnerNotFoundException;
-   
-	/**
-	 * Gives functionality of updating gym onwer's personal data. 
-	 * @param gymOwnerNew the gymOwner object in which the profile data needs to be updated
-	 * @param email the gymOwner email for which the profile data needs to be update
-	 * @throws GymOwnerNotFoundException 
-	 */
-    public void editProfile(GymOwner gymOwnerNews) throws GymOwnerNotFoundException;
-
-    /**
-	 * This method allows a gym owner to add details of a particular gym.
-	 * @param gym the gym object representing the gym details
-	 */
-    public boolean addGym(GymCentre gym);
     
    
     /**
